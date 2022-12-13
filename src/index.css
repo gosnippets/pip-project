@@ -1,13 +1,122 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.p-accordion {
+  margin-bottom: 15px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.p-accordion .accordion-details {
+  padding-bottom: 35px;
+}
+
+.p-accordion .accordion-avatar {
+  margin-top: 5px;
+  background: white;
+  border: 1px;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.46);
+  -webkit-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.46);
+  -moz-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.46);
+}
+
+.p-accordion .accordion-avatar,
+.p-accordion .accordion-typography {
+  font-weight: bold;
+  color: #00000082;
+}
+
+.p-accordion:hover .accordion-avatar,
+.p-accordion:hover .accordion-typography {
+  color: black;
+}
+
+.p-accordion:has(.Mui-expanded) .accordion-avatar,
+.p-accordion:has(.Mui-expanded) .accordion-typography {
+  color: black;
+}
+
+label.p-label {
+  color: black;
+  margin-bottom: 10px;
+}
+
+label.p-label.disabled {
+  color: #a2a2a2;
+}
+
+label.radio-label {
+  color: #a2a2a2;
+}
+
+.menuitem-placeholder {
+  color: #a2a2a2;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+}
+
+textarea.p-textarea {
+  width: 500px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  resize: none;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+textarea.p-textarea:hover {
+  border: 2px solid rgba(0, 0, 0, 0.87);
+}
+
+textarea.p-textarea:focus {
+  outline: 0;
+  border: 2px solid #1976d2;
+}
+
+.date-container {
+  margin-top: 20px;
+  display: flex;
+}
+
+.date-container .date {
+  width: 250px;
+  margin-right: 70px;
+}
+
+.error-msg-container {
+  margin-top: 5px;
+}
+
+.error-msg-container .alert {
+  color: red;
+}
+
+.p-typography {
+  padding-bottom: 15px;
+  color: #2196f3;
+}
+
+.p-select {
+  width: 300px;
+}
+
+.mt-25 {
+  margin-top: 25px;
+}
+
+.p-select-width {
+  min-width: 250px;
+}
+
+.p-btn {
+  justify-content: end;
+  margin-top: 35px;
+}
+
+.p-container {
+  margin: 2rem;
 }
