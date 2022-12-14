@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container';
-import Ticket from './features/ticket/Ticket';
+import Ticket from './features/ticket/ticket';
 
 function App() {
   return (

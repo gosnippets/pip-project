@@ -100,6 +100,7 @@ export const Ticket: React.FC = () => {
         toast.success("Ticket added successfully!");
       })
       .catch((error) => {
+        formik.setSubmitting(false);
         toast.error(error);
       });
 

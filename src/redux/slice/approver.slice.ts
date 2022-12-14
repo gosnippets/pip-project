@@ -22,20 +22,21 @@ export const approverSlice = createSlice({
             // TODO: Update state to clear success message
         }
     },
-    extraReducers: {
-        [getApprovers.pending.type]: (state, action) => {
-            state.status = "pending"
-            state.isLoading = true
-        },
-        [getApprovers.fulfilled.type]: (state, { payload }) => {
-            state.status = "success"
-            state.list = payload
-            state.isLoading = false
-        },
-        [getApprovers.rejected.type]: (state, action) => {
-            state.status = "failed"
-            state.isLoading = false
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getApprovers.pending, (state) => {
+                state.status = "pending"
+                state.isLoading = true
+            })
+            .addCase(getApprovers.fulfilled, (state, { payload }) => {
+                state.status = "success"
+                state.list = payload
+                state.isLoading = false
+            })
+            .addCase(getApprovers.rejected, (state) => {
+                state.status = "failed"
+                state.isLoading = false
+            });
     }
 })
 

@@ -19,19 +19,20 @@ export const ticketSlice = createSlice({
             // TODO: Update state to clear success message
         }
     },
-    extraReducers: { 
-        [addTicket.pending.type]: (state, action) => {
-            state.isLoading = true
-            state.status = "pending"
-        },
-        [addTicket.fulfilled.type]: (state, action) => {
-            state.isLoading = false
-            state.status = "success"
-        },
-        [addTicket.rejected.type]: (state, action) => {
-            state.isLoading = false
-            state.status = "failed"
-        }
+    extraReducers: (builder) => {
+        builder
+            .addCase(addTicket.pending, (state) => {
+                state.isLoading = true
+                state.status = "pending"
+            })
+            .addCase(addTicket.fulfilled, (state) => {
+                state.isLoading = false
+                state.status = "success"
+            })
+            .addCase(addTicket.rejected, (state) => {
+                state.isLoading = false
+                state.status = "failed"
+            });
     }
 })
 
