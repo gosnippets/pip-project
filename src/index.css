@@ -115,8 +115,90 @@ textarea.p-textarea:focus {
 .p-btn {
   justify-content: end;
   margin-top: 35px;
+  width: 100%;
+}
+
+.non-software-btn {
+  margin: 0 8px 25px 0;
 }
 
 .p-container {
   margin: 2rem;
+}
+
+.software-container {
+  padding: 0 25px;
+}
+.grid-container {
+  margin-bottom: 30px;
+}
+
+.card-header.css-185gdzj-MuiCardHeader-root {
+  background-color: #428fd6;
+  color: white;
+}
+
+.clear-btn:disabled {
+  color: #8ebce6 !important;
+}
+
+.submit-btn:disabled {
+  color: #f2f4f6 !important;
+  background-color: #8ebce6 !important;
+}
+
+.search-text-field .css-1x51dt5-MuiInputBase-input-MuiInput-input {
+  padding: 16.5px 14px;
+  padding-left: 0;
+}
+
+.css-1a1fmpi-MuiInputBase-root-MuiInput-root {
+  padding-left: 14px;
+}
+
+.pre-approved-card-content {
+  height: 303px;
+  overflow-y: scroll;
+  margin-right: 20px !important;
+}
+
+.pre-approved-card-content .css-et1ao3-MuiTypography-root,
+.pre-approved-card-content .css-10hburv-MuiTypography-root {
+  font-size: 1.5rem;
+  line-height: 1.8;
+}
+
+.pre-approved-card-content .css-1mcnwpj-MuiList-root {
+  max-width: 400px !important;
+}
+
+.pre-approved-card-content::-webkit-scrollbar {
+  height: 15px;
+}
+
+.pre-approved-card-content::-webkit-scrollbar-track {
+  background-color: #818b99;
+  border: 7px solid transparent;
+  background-clip: content-box;
+}
+
+.pre-approved-card-content::-webkit-scrollbar-thumb {
+  background: #428fd6;
+  border-radius: 4px;
+}
+
+label.selection-label {
+  color: black;
+  margin-bottom: 5px;
+  margin-top: 20px;
+  font-size: larger;
+}
+
+.chip {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chip-list {
+  margin: 3px;
 }

@@ -1,7 +1,8 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Button, FormControl, InputLabel, MenuItem, Stack, Typography, Select, SelectChangeEvent } from "@mui/material";
+import { Button, Checkbox, FormControl, FormControlLabel, InputLabel, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, Stack, Typography, Select, SelectChangeEvent, Grid, Card, CardHeader, CardContent, CardActions, Radio, RadioGroup, TextField, InputAdornment, Chip } from "@mui/material";
+import SearchIcon from '@mui/icons-material/Search';
 import CustomAccordion from "../../components/custom-accordion.component";
 import TicketForm from "../../components/ticket-form.component";
 import { toast, ToastContainer } from "react-toastify";
@@ -55,7 +56,20 @@ const initialValues = {
   toDate: null,
 };
 
+interface ChipData {
+  key: number;
+  label: string;
+}
+
 export const Ticket: React.FC = () => {
+  const [chipData, setChipData] = React.useState<readonly ChipData[]>([
+    { key: 0, label: 'Angular' },
+    { key: 1, label: 'jQuery' },
+    { key: 2, label: 'Polymer' },
+    { key: 3, label: 'React' },
+    { key: 4, label: 'Vue.js' }
+  ]);
+
   const [approver, setApprover] = useState("");
   const dispatch = useAppDispatch();
 
@@ -93,16 +107,16 @@ export const Ticket: React.FC = () => {
       console.log("data", data);
 
       dispatch(addTicket(data))
-      .unwrap()
-      .then((response) => {        
-        resetForm();
-        console.log('response',response)
-        toast.success("Ticket added successfully!");
-      })
-      .catch((error) => {
-        formik.setSubmitting(false);
-        toast.error(error);
-      });
+        .unwrap()
+        .then((response) => {
+          resetForm();
+          console.log('response', response)
+          toast.success("Ticket added successfully!");
+        })
+        .catch((error) => {
+          formik.setSubmitting(false);
+          toast.error(error);
+        });
 
     },
   });
@@ -131,10 +145,31 @@ export const Ticket: React.FC = () => {
     return approverList?.find((approver) => approver.id === id);
   };
 
+
+  const [checked, setChecked] = React.useState([0]);
+  console.log("Checked", checked)
+
+  const handleToggle = (value: number) => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
+  };
+
+  const handleDelete = (chipToDelete: ChipData) => () => {
+    setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+  };
+
   return (
     <>
       <Typography variant="h6" className="p-typography">Create New Ticket</Typography>
-      <ToastContainer closeOnClick={true} /> 
+      <ToastContainer closeOnClick={true} />
 
       <form id="ticket_form" onSubmit={formik.handleSubmit}>
         <CustomAccordion index="1" title="Let us know about your ticket">
@@ -142,6 +177,123 @@ export const Ticket: React.FC = () => {
         </CustomAccordion>
 
         <CustomAccordion index="2" title="Detailed Information">
+
+          <div className="software-container">
+            <Grid container spacing={7} className="grid-container">
+              <Grid item xs={12} md={6}>
+                <Card>
+                  <CardHeader className="card-header" title="Pre Approved Software" />
+                  <TextField
+                    fullWidth
+                    placeholder="Search"
+                    className="search-text-field"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <SearchIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                    variant="standard"
+                  />
+
+                  <CardContent className="pre-approved-card-content">
+                    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((value) => {
+                        const labelId = `checkbox-list-label-${value}`;
+
+                        return (
+                          <ListItem
+                            key={value}
+                            secondaryAction={
+                              <ListItemText id={labelId} primary={`${value + 1}`} />
+                            }
+                            disablePadding
+                          >
+                            <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
+                              <ListItemIcon>
+                                <Checkbox
+                                  edge="start"
+                                  checked={checked.indexOf(value) !== -1}
+                                  tabIndex={-1}
+                                  disableRipple
+                                  inputProps={{ 'aria-labelledby': labelId }}
+                                />
+                              </ListItemIcon>
+                              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+                            </ListItemButton>
+                          </ListItem>
+                        );
+                      })}
+                    </List>
+
+
+                  </CardContent>
+                </Card>
+                <InputLabel className="selection-label">Selection</InputLabel>
+                <div className="chip">
+                  {chipData.map((data) => {
+                    return (
+                      <div key={data.key} className="chip-list">
+                        <Chip
+                          label={data.label}
+                          color="primary"
+                          onDelete={handleDelete(data)}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Card>
+                  <CardHeader className="card-header" title="Non Pre Approved Software" />
+                  <CardContent>
+                    <InputLabel className='p-label'>Software</InputLabel>
+                    <TextField required fullWidth placeholder="Enter Software Name" {...formik.getFieldProps('title')} />
+
+                    <InputLabel className='p-label mt-25'>What is the type of software?</InputLabel>
+                    <RadioGroup row {...formik.getFieldProps('ticketType')}>
+                      <FormControlLabel value="1" control={<Radio />} label="License" className='radio-label' />
+                      <FormControlLabel value="2" control={<Radio />} label="Open Source" className='radio-label' />
+                    </RadioGroup>
+
+                    <InputLabel className='p-label mt-25'>Who is the license provider?</InputLabel>
+                    <RadioGroup row {...formik.getFieldProps('ticketType')}>
+                      <FormControlLabel value="1" control={<Radio />} label="Afour Technologies" className='radio-label' />
+                      <FormControlLabel value="2" control={<Radio />} label="Client" className='radio-label' />
+                    </RadioGroup>
+
+                  </CardContent>
+                  <CardActions>
+                    <Stack spacing={2} direction="row" className="p-btn non-software-btn" >
+                      <Button type="reset" className="clear-btn" variant="text" disabled onClick={e => resetForm()} >
+                        Clear
+                      </Button>
+                      <Button type="submit" className="submit-btn" variant="contained" disabled>Add</Button>
+                    </Stack>
+                  </CardActions>
+                </Card>
+
+                <InputLabel className="selection-label">Selection</InputLabel>
+                <div className="chip">
+                  {chipData.map((data) => {
+                    return (
+                      <div key={data.key} className="chip-list">
+                        <Chip
+                          label={data.label}
+                          color="primary"
+                          onDelete={handleDelete(data)}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+
+              </Grid>
+            </Grid>
+          </div>
+
           <InputLabel className="p-label">Approver</InputLabel>
           <FormControl className="p-select-width" size="small">
             <Select
@@ -174,13 +326,14 @@ export const Ticket: React.FC = () => {
               </span>
             </div>
           )}
+
         </CustomAccordion>
 
         <Stack spacing={2} direction="row" className="p-btn" >
-          <Button type="reset" variant="text" disabled={formik.isSubmitting} onClick={e => resetForm()} >
+          <Button type="reset" variant="text" className="clear-btn" disabled={formik.isSubmitting} onClick={e => resetForm()} >
             Cancel
           </Button>
-          <Button type="submit" variant="contained" disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>
+          <Button type="submit" variant="contained" className="submit-btn" disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}>
             {!formik.isSubmitting && <span>Submit</span>}
             {formik.isSubmitting && <span>Submitting... </span>}
           </Button>
