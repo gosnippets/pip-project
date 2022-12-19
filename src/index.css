@@ -129,8 +129,13 @@ textarea.p-textarea:focus {
 .software-container {
   padding: 0 25px;
 }
+
 .grid-container {
   margin-bottom: 30px;
+}
+
+.selection-container {
+  margin-left: -5%;
 }
 
 .card-header.css-185gdzj-MuiCardHeader-root {
@@ -158,7 +163,7 @@ textarea.p-textarea:focus {
 
 .pre-approved-card-content {
   height: 303px;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-right: 20px !important;
 }
 
@@ -197,8 +202,15 @@ label.selection-label {
 .chip {
   display: flex;
   flex-wrap: wrap;
+  margin-left: 15px;
 }
 
 .chip-list {
   margin: 3px;
+}
+
+div.css-1fc5b9q-MuiButtonBase-root-MuiChip-root {
+  border-radius: 10px;
+  padding: 0 2px;
+  background-color: #428fd6;
 }

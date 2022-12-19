@@ -71,7 +71,8 @@ function TicketForm({ formik }: any) {
             </div>
         )}
 
-        <InputLabel className={`p-label mt-25 ${formik.values?.timelineType === 'Permanent' ? 'disabled' : ''}`}>What is the Duration of your Request?</InputLabel>
+
+        <InputLabel className={`p-label mt-25 ${formik.values?.timelineType === 'Permanent' ? 'disabled' : ''}`}>{formik.values.ticketType !== "1" ? (<>Since when are you facing the issue?</>) : (<>What is the Duration of your Request?</>)}</InputLabel>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <div className='date-container'>
                 <div className='date'>
@@ -92,24 +93,26 @@ function TicketForm({ formik }: any) {
                         </div>
                     )}
                 </div>
-                <div className='date'>
-                    <DatePicker
-                        label="To Date"
-                        minDate={formik.values?.fromDate ? formik.values.fromDate : new Date()}
-                        disabled={formik.values?.timelineType === 'Permanent' ? true : false}
-                        inputFormat="YYYY-MM-DD"
-                        {...formik.getFieldProps('toDate')}
-                        onChange={(newValue) => {
-                            formik.setFieldValue("toDate", newValue);
-                        }}
-                        renderInput={(params) => <TextField {...params} variant="standard" />}
-                    />
-                    {formik.touched.timelineType && formik.errors.toDate && (
-                        <div className='error-msg-container'>
-                            <span className='alert' role='alert'>{formik.errors.toDate}</span>
-                        </div>
-                    )}
-                </div>
+                {formik.values.ticketType !== "2" && formik.values.ticketType !== "3" && (
+                    <div className='date'>
+                        <DatePicker
+                            label="To Date"
+                            minDate={formik.values?.fromDate ? formik.values.fromDate : new Date()}
+                            disabled={formik.values?.timelineType === 'Permanent' ? true : false}
+                            inputFormat="YYYY-MM-DD"
+                            {...formik.getFieldProps('toDate')}
+                            onChange={(newValue) => {
+                                formik.setFieldValue("toDate", newValue);
+                            }}
+                            renderInput={(params) => <TextField {...params} variant="standard" />}
+                        />
+                        {formik.touched.timelineType && formik.errors.toDate && (
+                            <div className='error-msg-container'>
+                                <span className='alert' role='alert'>{formik.errors.toDate}</span>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
         </LocalizationProvider>
     </>);
