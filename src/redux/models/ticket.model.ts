@@ -12,6 +12,6 @@ export type Ticket = {
 
 export interface ITicket {
     tickets: Ticket,
-    selectedSoftwares: { preApprovedSoftware: Array<string> },
+    selectedSoftwares: { preApprovedSoftware: Array<string>, nonPreApprovedSoftware: Array<object>},
     images: Array<string>
 }
