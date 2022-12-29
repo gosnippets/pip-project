@@ -1,5 +1,5 @@
 export interface IApprover {
-    id: string,
+    employeeId: string,
     firstName: string,
     lastName: string,
     email: string,

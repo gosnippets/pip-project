@@ -1,8 +1,8 @@
 import { FormControlLabel, InputLabel, Radio, RadioGroup, TextareaAutosize, TextField } from '@mui/material';
-
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import "./ticketForm.component.css";
 
 function TicketForm({ formik }: any) {
     return (<>
@@ -37,9 +37,10 @@ function TicketForm({ formik }: any) {
         <InputLabel className='p-label mt-25'>What kind of Request you want to proceed with?</InputLabel>
         <RadioGroup row name="row-radio-buttons-group" {...formik.getFieldProps('category')}>
             <FormControlLabel value="1" control={<Radio />} label="Hardware" className='radio-label' />
-            <FormControlLabel value="2" control={<Radio />} label="Software" className='radio-label' />
-            <FormControlLabel value="3" control={<Radio />} label="Network" className='radio-label' />
-            <FormControlLabel value="4" control={<Radio />} label="Access" className='radio-label' />
+            <FormControlLabel value="2" control={<Radio />} label="Non Pre Aproved Software" className='radio-label' />
+            <FormControlLabel value="3" control={<Radio />} label="Pre Aproved Software" className='radio-label' />
+            <FormControlLabel value="4" control={<Radio />} label="Network" className='radio-label' />
+            <FormControlLabel value="5" control={<Radio />} label="Access" className='radio-label' />
         </RadioGroup>
         {formik.touched.category && formik.errors.category && (
             <div className='error-msg-container'>

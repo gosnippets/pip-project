@@ -1,0 +1,35 @@
+body{
+  background: #EAEDF0;
+}
+.p-accordion {
+  margin-bottom: 15px;
+}
+
+.p-accordion .accordion-details {
+  padding-bottom: 35px;
+}
+
+.p-accordion .accordion-avatar {
+  margin-top: 5px;
+  background: white;
+  border: 1px;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.46);
+  -webkit-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.46);
+  -moz-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.46);
+}
+
+.p-accordion .accordion-avatar,
+.p-accordion .accordion-typography {
+  font-weight: bold;
+  color: #00000082;
+}
+
+.p-accordion:hover .accordion-avatar,
+.p-accordion:hover .accordion-typography {
+  color: black;
+}
+
+.p-accordion:has(.Mui-expanded) .accordion-avatar,
+.p-accordion:has(.Mui-expanded) .accordion-typography {
+  color: black;
+}

@@ -1,0 +1,68 @@
+label.p-label {
+  color: black;
+  margin-bottom: 10px;
+}
+
+label.p-label.disabled {
+  color: #a2a2a2;
+}
+
+label.radio-label {
+  color: #a2a2a2;
+}
+
+.menuitem-placeholder {
+  color: #a2a2a2;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+}
+
+textarea.p-textarea {
+  width: 500px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  resize: none;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+textarea.p-textarea:hover {
+  border: 2px solid rgba(0, 0, 0, 0.87);
+}
+
+textarea.p-textarea:focus {
+  outline: 0;
+  border: 2px solid #1976d2;
+}
+
+.date-container {
+  margin-top: 20px;
+  display: flex;
+}
+
+.date-container .date {
+  width: 250px;
+  margin-right: 70px;
+}
+
+.error-msg-container {
+  margin-top: 5px;
+}
+
+.error-msg-container .alert {
+  color: red;
+}
+
+.p-typography {
+  padding-bottom: 15px;
+  color: #2196f3;
+}
