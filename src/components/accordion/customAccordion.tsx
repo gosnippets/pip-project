@@ -1,6 +1,6 @@
 import { Accordion, AccordionSummary, AccordionDetails, Avatar, Grid, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import "./customAccordion.component.css"
+import "./customAccordion.css";
 
 interface MyProps {
     index: string,

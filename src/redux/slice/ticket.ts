@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addTicket } from "../apis/ticket.api";
+import { addTicket } from "../apis/ticket";
 
 type TicketState = {
     isLoading: boolean,

@@ -28,19 +28,19 @@ import {
   Chip,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import CustomAccordion from "../../components/customAccordion.component";
-import TicketForm from "../../components/ticketForm.component";
+import CustomAccordion from "../../components/accordion/customAccordion";
+import TicketForm from "../../components/ticket-form/ticketForm";
 import { toast, ToastContainer } from "react-toastify";
 import { useFormik } from "formik";
 import { useAppDispatch } from "../../redux/hooks";
-import { getApprovers } from "../../redux/apis/approver.api";
+import { getApprovers } from "../../redux/apis/approver";
 import { RootState } from "../../redux/store";
 import { dateFormat } from "../../utils/dateFormat";
-import { addTicket } from "../../redux/apis/ticket.api";
-import { INonPreApproved, IPreApproved, ISoftware } from "../../redux/models/software.model";
-import { getSoftwares } from "../../redux/apis/software.api";
+import { addTicket } from "../../redux/apis/ticket";
+import { INonPreApproved, IPreApproved, ISoftware } from "../../redux/models/software";
+import { getSoftwares } from "../../redux/apis/software";
 import "./ticket.css";
-import { nonPreApprovedSchema, nonPreApprovedValues, ticketSchema, initialValues } from "../../redux/yup/ticket.yup";
+import { nonPreApprovedSchema, nonPreApprovedValues, ticketSchema, initialValues } from "../../redux/yup/ticket";
 import {
   ADD_TICKET,
   API_FAILING,
@@ -89,8 +89,8 @@ export const Ticket: React.FC = () => {
           category: { id: values.category },
           priority: { id: values.priority },
           duration: values.duration,
-          approvedBy: { employeeId: values.approver },
-          accessType: "",
+          approvedBy:  values.approver,
+          accessType: values.accessType,
           facingIssue: null,
           startDate: dateFormat(values.startDate),
           endDate: dateFormat(values.endDate),
@@ -176,7 +176,7 @@ export const Ticket: React.FC = () => {
 
   const handleSelectChange = (event: SelectChangeEvent) => {
     setApprover(event.target.value);
-    formik.setFieldValue(APPROVER, event.target.value);
+    formik.setFieldValue(APPROVER, { employeeId: event.target.value} );
   };
 
   const getApprover = (employeeId: any) => {
@@ -462,39 +462,62 @@ export const Ticket: React.FC = () => {
               </div>
             )}
 
-            <InputLabel className="p-label">Approver</InputLabel>
-            <FormControl className="p-select-width" size="small">
-              <Select
-                displayEmpty
-                value={approver}
-                className="p-select"
-                onChange={handleSelectChange}
-                renderValue={(selected) => {
-                  var approver = getApprover(selected);
-                  if (selected.length === 0) {
-                    return (
-                      <span className="menuitem-placeholder">
-                        Select Approver's Name
-                      </span>
-                    );
-                  }
-                  return approver?.firstName + " " + approver?.lastName;
-                }}
-              >
-                {approverList?.map((approver) => (
-                  <MenuItem key={approver.employeeId} value={approver.employeeId}>
-                    {approver.firstName + " " + approver.lastName}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            {formik.touched.approver && formik.errors.approver && (
-              <div className="error-msg-container">
-                <span className="alert" role="alert">
-                  {formik.errors.approver}
-                </span>
-              </div>
-            )}
+            {formik.values.ticketType === "1" &&
+              formik.values.category === "5" && (<>
+                <InputLabel className='p-label'>Which access do you want?</InputLabel>
+                <RadioGroup row className="mb-20" {...formik.getFieldProps('accessType')}>
+                  <FormControlLabel value="Admin" control={<Radio />} label="Admin" className='radio-label' />
+                  <FormControlLabel value="AWS" control={<Radio />} label="AWS" className='radio-label' />
+                  <FormControlLabel value="Azure" control={<Radio />} label="Azure" className='radio-label' />
+                  <FormControlLabel value="Geeklab" control={<Radio />} label="Geeklab" className='radio-label' />
+                  <FormControlLabel value="Redmine" control={<Radio />} label="Redmine" className='radio-label' />
+                  <FormControlLabel value="Testlink" control={<Radio />} label="Testlink" className='radio-label' />
+                  <FormControlLabel value="USB" control={<Radio />} label="USB" className='radio-label' />
+                  <FormControlLabel value="VM(Virtual Machine)" control={<Radio />} label="VM(Virtual Machine)" className='radio-label' />
+                </RadioGroup>
+                {formik.touched.category && formik.errors.category && (
+                  <div className='error-msg-container'>
+                    <span className='alert' role='alert'>{formik.errors.category}</span>
+                  </div>
+                )}
+              </>)}
+
+            {formik.values.ticketType === "1" &&
+              formik.values.category !== "3" && (<>
+                <InputLabel className="p-label">Approver</InputLabel>
+                <FormControl className="p-select-width" size="small">
+                  <Select
+                    displayEmpty
+                    value={approver}
+                    className="p-select"
+                    onChange={handleSelectChange}
+                    renderValue={(selected) => {
+                      var approver = getApprover(selected);
+                      if (selected.length === 0) {
+                        return (
+                          <span className="menuitem-placeholder">
+                            Select Approver's Name
+                          </span>
+                        );
+                      }
+                      return approver?.firstName + " " + approver?.lastName;
+                    }}
+                  >
+                    {approverList?.map((approver) => (
+                      <MenuItem key={approver.employeeId} value={approver.employeeId}>
+                        {approver.firstName + " " + approver.lastName}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                {formik.touched.approver && formik.errors.approver && (
+                  <div className="error-msg-container">
+                    <span className="alert" role="alert">
+                      {formik.errors.approver}
+                    </span>
+                  </div>
+                )}
+              </>)}
           </CustomAccordion>
         )}
 

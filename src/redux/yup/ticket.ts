@@ -1,4 +1,3 @@
-import { min } from "moment";
 import * as Yup from "yup";
 import { 
   CATEGORY, 
@@ -37,11 +36,10 @@ const ticketSchema = Yup.object().shape({
   category: Yup.string().required(CATEGORY_ERROR),
   priority: Yup.string().required(PRIORITY_ERROR),
   duration: Yup.string().required(TIMELINE_ERROR),
-  approver: Yup.string().when([TICKET_TYPE, CATEGORY], {
-    is: (ticketType: string) =>
-      ticketType === "1",
-    then: Yup.string().required(),
-    otherwise: Yup.string().nullable(),
+  approver: Yup.object().when([TICKET_TYPE, CATEGORY], {
+    is: (ticketType: string,  category: string) => { if(ticketType === "1" && category !== "3") {return true}} ,
+    then: Yup.object().required(),
+    otherwise: Yup.object().nullable(),
   }),
   startDate: Yup.date().when(DURATION, {
     is: (duration: string) => duration === PERMANENT,
@@ -68,6 +66,11 @@ const ticketSchema = Yup.object().shape({
     then: Yup.array().min(1).required(),
     otherwise: Yup.array().nullable(),
   }),
+  accessType: Yup.string().when([TICKET_TYPE, CATEGORY], {
+    is: (ticketType: string, category: string) => ticketType === "1" && category === "5",
+    then: Yup.string().required(),
+    otherwise: Yup.string().nullable(),
+  }),
 });
 
 const initialValues = {
@@ -77,11 +80,12 @@ const initialValues = {
   category: "",
   priority: "",
   duration: "",
-  approver: "",
+  approver: null,
   startDate: null,
   endDate: null,
   preApprovedSoftware: [],
   nonPreApprovedSoftware: [],
+  accessType:""
 };
 
 export { nonPreApprovedSchema, nonPreApprovedValues, ticketSchema, initialValues }

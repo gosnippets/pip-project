@@ -2,7 +2,7 @@ import { FormControlLabel, InputLabel, Radio, RadioGroup, TextareaAutosize, Text
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import "./ticketForm.component.css";
+import "./ticketForm.css";
 
 function TicketForm({ formik }: any) {
     return (<>
@@ -73,7 +73,7 @@ function TicketForm({ formik }: any) {
         )}
 
 
-        <InputLabel className={`p-label mt-25 ${formik.values?.duration === 'Permanent' ? 'disabled' : ''}`}>{formik.values.ticketType !== "1" ? (<>Since when are you facing the issue?</>) : (<>What is the Duration of your Request?</>)}</InputLabel>
+        <InputLabel className={`p-label mt-25 ${formik.values?.duration === 'Permanent' ? 'disabled' : ''}`}>{formik.values.ticketType === "1" ? (<>What is the Duration of your Request?</>) : (<>Since when are you facing the issue?</>)}</InputLabel>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <div className='date-container'>
                 <div className='date'>

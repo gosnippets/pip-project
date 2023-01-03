@@ -1,6 +1,10 @@
 label.p-label {
-  color: black;
   margin-bottom: 10px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 label.p-label.disabled {
@@ -8,7 +12,12 @@ label.p-label.disabled {
 }
 
 label.radio-label {
-  color: #a2a2a2;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 12px;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .menuitem-placeholder {
@@ -51,7 +60,7 @@ textarea.p-textarea:focus {
 
 .date-container .date {
   width: 250px;
-  margin-right: 70px;
+  margin-right: 6px;
 }
 
 .error-msg-container {
@@ -65,4 +74,11 @@ textarea.p-textarea:focus {
 .p-typography {
   padding-bottom: 15px;
   color: #2196f3;
+}
+
+.css-1ptx2yq-MuiInputBase-root-MuiInput-root {
+  max-width:500px;
+}
+.css-1ptx2yq-MuiInputBase-root-MuiInput-root{
+  width: 157px !important;
 }

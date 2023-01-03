@@ -1,21 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getSoftwares } from "../apis/software.api";
-import { ISoftware } from "../models/software.model";
+import { getApprovers } from "../apis/approver";
+import { IApprover } from "../models/approver";
 
-type SoftwareState = {
+type ApproverState = {
     isLoading: boolean,
     status: "" | "pending" | "success" | "failed";
-    list: ISoftware[];
+    list: IApprover[];
 };
 
-const initialState: SoftwareState = {
+const initialState: ApproverState = {
     isLoading: false,
     status: "",
     list: []
 };
 
-export const softwareSlice = createSlice({
-    name: "software",
+export const approverSlice = createSlice({
+    name: "approver",
     initialState,
     reducers: {
         clearSuccessMessage: (state, payload) => {
@@ -24,20 +24,20 @@ export const softwareSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getSoftwares.pending, (state) => {
+            .addCase(getApprovers.pending, (state) => {
                 state.status = "pending"
                 state.isLoading = true
             })
-            .addCase(getSoftwares.fulfilled, (state, { payload }) => {
+            .addCase(getApprovers.fulfilled, (state, { payload }) => {
                 state.status = "success"
                 state.list = payload
                 state.isLoading = false
             })
-            .addCase(getSoftwares.rejected, (state) => {
+            .addCase(getApprovers.rejected, (state) => {
                 state.status = "failed"
                 state.isLoading = false
             });
     }
 })
 
-export default softwareSlice.reducer
+export default approverSlice.reducer

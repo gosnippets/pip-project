@@ -1,7 +1,7 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import approverSlice from './slice/approver.slice';
-import ticketSlice from './slice/ticket.slice';
-import softwareSlice from './slice/software.slice';
+import approverSlice from './slice/approver';
+import ticketSlice from './slice/ticket';
+import softwareSlice from './slice/software';
 
 export const store = configureStore({
   reducer: {
